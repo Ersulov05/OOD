@@ -16,12 +16,12 @@ public:
 		++m_quackCounter;
 	}
 
-	bool isQuackable() override
+	bool isQuackable() const override
 	{
 		return m_quackable;
 	}
 
-	int getQuackCounter()
+	int getQuackCounter() const
 	{
 		return m_quackCounter;
 	}

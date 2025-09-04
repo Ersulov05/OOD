@@ -13,12 +13,12 @@ public:
 		std::cout << "I'm flying with wings!!" << std::endl;
 	}
 
-	int getFlyCounter() override
+	int getFlyCounter() const override
 	{
 		return m_flyCounter;
 	}
 
-	bool isFlyable() override
+	bool isFlyable() const override
 	{
 		return true;
 	}

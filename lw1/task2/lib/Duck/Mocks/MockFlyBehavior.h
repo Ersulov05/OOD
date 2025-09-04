@@ -14,12 +14,12 @@ public:
 		++m_flyCounter;
 	}
 
-	int getFlyCounter() override
+	int getFlyCounter() const override
 	{
 		return m_flyCounter;
 	}
 
-	bool isFlyable() override
+	bool isFlyable() const override
 	{
 		return m_flyable;
 	}
