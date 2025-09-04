@@ -1,6 +1,7 @@
 #ifndef DUCK_H
 #define DUCK_H
 
+#include "Dance/IDanceBehavior.h"
 #include "Fly/IFlyBehavior.h"
 #include "Quack/IQuakBehavior.h"
 
@@ -12,11 +13,15 @@
 class Duck
 {
 public:
-	Duck(std::unique_ptr<IFlyBehavior>&& flyBehavior,
-		std::unique_ptr<IQuackBehavior>&& quackBehavior)
+	Duck(
+		std::unique_ptr<IFlyBehavior>&& flyBehavior,
+		std::unique_ptr<IQuackBehavior>&& quackBehavior,
+		std::unique_ptr<IDanceBehavior>&& danceBehavior)
 		: m_quackBehavior(std::move(quackBehavior))
+		, m_danceBehavior(std::move(danceBehavior))
 	{
 		assert(m_quackBehavior);
+		assert(m_danceBehavior);
 		SetFlyBehavior(std::move(flyBehavior));
 	}
 
@@ -37,7 +42,7 @@ public:
 
 	virtual void Dance()
 	{
-		std::cout << "I'm Dancing" << std::endl;
+		m_danceBehavior->Dance();
 	}
 
 	void SetFlyBehavior(std::unique_ptr<IFlyBehavior>&& flyBehavior)
@@ -52,6 +57,7 @@ public:
 private:
 	std::unique_ptr<IFlyBehavior> m_flyBehavior;
 	std::unique_ptr<IQuackBehavior> m_quackBehavior;
+	std::unique_ptr<IDanceBehavior> m_danceBehavior;
 };
 
 #endif
