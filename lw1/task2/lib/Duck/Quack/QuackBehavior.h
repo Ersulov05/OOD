@@ -11,6 +11,11 @@ public:
 	{
 		std::cout << "Quack Quack!!!" << std::endl;
 	}
+
+	bool isQuackable() override
+	{
+		return true;
+	}
 };
 
 #endif

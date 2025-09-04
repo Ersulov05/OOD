@@ -32,7 +32,15 @@ public:
 
 	void Fly()
 	{
+		if (!m_flyBehavior->isFlyable())
+			return;
+
+		std::cout << "Вылет номер " << m_flyBehavior->getFlyCounter() + 1 << std::endl;
 		m_flyBehavior->Fly();
+		if (m_quackBehavior->isQuackable() && m_flyBehavior->getFlyCounter() % 2 == 0)
+		{
+			Quack();
+		}
 	}
 
 	virtual void Dance()

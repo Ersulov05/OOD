@@ -1,16 +1,17 @@
-#ifndef FLYWITHWINGS_H
-#define FLYWITHWINGS_H
+#pragma once
 
-#include "IFlyBehavior.h"
+#include "../Fly/IFlyBehavior.h"
 #include <iostream>
 
-class FlyWithWings : public IFlyBehavior
+class MockFlyBehavior : public IFlyBehavior
 {
 public:
+	MockFlyBehavior(bool flyable = true)
+		: m_flyable(flyable){};
+
 	void Fly() override
 	{
 		++m_flyCounter;
-		std::cout << "I'm flying with wings!!" << std::endl;
 	}
 
 	int getFlyCounter() override
@@ -20,11 +21,10 @@ public:
 
 	bool isFlyable() override
 	{
-		return true;
+		return m_flyable;
 	}
 
 private:
 	int m_flyCounter = 0;
+	bool m_flyable;
 };
-
-#endif
