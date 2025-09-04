@@ -12,15 +12,11 @@ TESTS_BIN_DIR := $(BIN_DIR)/tests
 
 # Основные исходные файлы
 MAIN_SRCS := \
-	SimUDuck.cpp 
+	main.cpp 
 
 # Тестовые файлы
 TEST_SRCS := \
-	$(TEST_DIR)/CAdvancedStudent.cpp \
-	$(TEST_DIR)/CStudent.cpp \
-	$(TEST_DIR)/CTeacher.cpp \
-	$(TEST_DIR)/CWorker.cpp \
-	$(TEST_DIR)/CPupil.cpp
+	$(TEST_DIR)/TestDuckDance.cpp
 
 # Объектные файлы для основной программы
 MAIN_OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(MAIN_SRCS))

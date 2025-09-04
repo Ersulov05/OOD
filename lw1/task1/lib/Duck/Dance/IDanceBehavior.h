@@ -4,7 +4,7 @@
 struct IDanceBehavior
 {
 	virtual ~IDanceBehavior(){};
-	virtual const void Dance() = 0;
+	virtual void Dance() const = 0;
 };
 
 #endif
