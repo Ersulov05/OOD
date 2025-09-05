@@ -32,12 +32,12 @@ public:
 
 	void Fly()
 	{
-		if (!m_flyBehavior->isFlyable())
+		if (!m_flyBehavior->IsFlyable())
 			return;
 
-		std::cout << "Вылет номер " << m_flyBehavior->getFlyCounter() + 1 << std::endl;
+		std::cout << "Вылет номер " << m_flyBehavior->GetFlyCounter() + 1 << std::endl;
 		m_flyBehavior->Fly();
-		if (m_quackBehavior->isQuackable() && m_flyBehavior->getFlyCounter() % 2 == 0)
+		if (m_quackBehavior->IsQuackable() && m_flyBehavior->GetFlyCounter() % 2 == 0) // TODO Методы с большой буквы
 		{
 			Quack();
 		}

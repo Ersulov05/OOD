@@ -12,7 +12,7 @@ public:
 		std::cout << "Quack Quack!!!" << std::endl;
 	}
 
-	bool isQuackable() override
+	bool IsQuackable() const override
 	{
 		return true;
 	}

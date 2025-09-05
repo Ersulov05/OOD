@@ -5,8 +5,8 @@ struct IFlyBehavior
 {
 	virtual ~IFlyBehavior(){};
 	virtual void Fly() = 0;
-	virtual int getFlyCounter() const = 0;
-	virtual bool isFlyable() const = 0;
+	virtual int GetFlyCounter() const = 0;
+	virtual bool IsFlyable() const = 0;
 };
 
 #endif

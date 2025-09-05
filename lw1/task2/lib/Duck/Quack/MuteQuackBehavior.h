@@ -7,7 +7,7 @@ class MuteQuackBehavior : public IQuackBehavior
 {
 public:
 	void Quack() override {}
-	bool isQuackable() override
+	bool IsQuackable() const override
 	{
 		return false;
 	}
