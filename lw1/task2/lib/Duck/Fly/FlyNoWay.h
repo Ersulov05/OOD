@@ -8,12 +8,12 @@ class FlyNoWay : public IFlyBehavior
 public:
 	void Fly() override {}
 
-	int getFlyCounter() override
+	int GetFlyCounter() const override
 	{
 		return 0;
 	}
 
-	bool isFlyable() override
+	bool IsFlyable() const override
 	{
 		return false;
 	}
