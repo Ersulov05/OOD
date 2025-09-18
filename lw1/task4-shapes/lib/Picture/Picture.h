@@ -2,6 +2,8 @@
 
 #include "../Shape/Shape.h"
 #include "../Shape/ShapeStrategy/IShapeStrategy.h"
+#include "./Exception/ShapeDontUniqueIdException.h"
+#include "./Exception/ShapeNotFoundException.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -111,7 +113,7 @@ private:
 	{
 		if (!shape)
 		{
-			throw std::runtime_error("Shape with id \"" + shapeId + "\" not found");
+			throw ShapeNotFoundException(shapeId);
 		}
 	}
 
@@ -120,7 +122,7 @@ private:
 		auto shape = FindShapeById(shapeId);
 		if (shape)
 		{
-			throw std::runtime_error("Shape with id \"" + shapeId + "\" already exists");
+			throw ShapeDontUniqueIdException(shapeId);
 		}
 	}
 
