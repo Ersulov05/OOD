@@ -14,6 +14,10 @@ public:
 		m_topLeft = Point(std::stod(parametrs[0]), std::stod(parametrs[1]));
 		m_size = std::stod(parametrs[2]);
 		m_text = parametrs[3];
+		for (auto param = parametrs.begin() + 4; param != parametrs.end(); ++param)
+		{
+			m_text += " " + *param;
+		}
 	};
 
 	std::string GetType() const override
@@ -23,7 +27,8 @@ public:
 
 	std::string GetDescription() const override
 	{
-		return "text description";
+		return std::to_string(m_topLeft.x) + " " + std::to_string(m_topLeft.y) + " "
+			+ std::to_string(m_size) + " " + m_text;
 	};
 
 	void Draw(gfx::ICanvas& canvas) const override
@@ -44,7 +49,7 @@ private:
 
 	void static ValidateCountParameters(const std::vector<std::string>& parameters)
 	{
-		if (parameters.size() != 4)
+		if (parameters.size() < 4)
 		{
 			throw InvalidCountParametersException();
 		}

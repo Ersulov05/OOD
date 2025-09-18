@@ -22,7 +22,8 @@ public:
 
 	std::string GetDescription() const override
 	{
-		return "line description";
+		return std::to_string(m_start.y) + " " + std::to_string(m_start.y) + " "
+			+ std::to_string(m_end.x) + " " + std::to_string(m_end.y);
 	};
 
 	void Draw(gfx::ICanvas& canvas) const override

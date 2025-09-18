@@ -7,6 +7,7 @@
 #include "../DrawPictureCommand.h"
 #include "../DrawShapeCommand.h"
 #include "../IAppCommand.h"
+#include "../ListShapesCommand.h"
 #include "../MovePictureCommand.h"
 #include "../MoveShapeCommand.h"
 #include "../RunWindowCommand.h"
@@ -41,6 +42,7 @@ private:
 		{ "changeShape", [this](const std::vector<std::string>& params) { return std::make_unique<ChangeShapeCommand>(params); } },
 		{ "deleteShape", [this](const std::vector<std::string>& params) { return std::make_unique<DeleteShapeCommand>(params); } },
 		{ "changeColor", [this](const std::vector<std::string>& params) { return std::make_unique<ChangeShapeColorCommand>(params); } },
+		{ "list", [this](const std::vector<std::string>& params) { return std::make_unique<ListShapesCommand>(params); } },
 		{ "movePicture", [this](const std::vector<std::string>& params) { return std::make_unique<MovePictureCommand>(params); } },
 		{ "drawPicture", [this](const std::vector<std::string>& params) { return std::make_unique<DrawPictureCommand>(params); } },
 		{ "run", [this](const std::vector<std::string>& params) { return std::make_unique<RunWindowCommand>(params); } },

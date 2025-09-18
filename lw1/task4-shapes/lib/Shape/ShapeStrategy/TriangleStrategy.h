@@ -25,7 +25,9 @@ public:
 
 	std::string GetDescription() const override
 	{
-		return "triangle description";
+		return std::to_string(m_vertex1.x) + " " + std::to_string(m_vertex1.y) + " "
+			+ std::to_string(m_vertex2.x) + " " + std::to_string(m_vertex2.y) + " "
+			+ std::to_string(m_vertex3.x) + " " + std::to_string(m_vertex3.y);
 	};
 
 	void Draw(gfx::ICanvas& canvas) const override

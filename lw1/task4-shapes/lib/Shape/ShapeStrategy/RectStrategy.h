@@ -25,7 +25,8 @@ public:
 
 	std::string GetDescription() const override
 	{
-		return "rectangle description";
+		return std::to_string(m_topLeft.x) + " " + std::to_string(m_topLeft.y) + " "
+			+ std::to_string(m_width) + " " + std::to_string(m_height);
 	};
 
 	void Draw(gfx::ICanvas& canvas) const override

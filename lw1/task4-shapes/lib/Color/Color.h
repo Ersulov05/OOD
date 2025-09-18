@@ -7,7 +7,7 @@ using Color = u_int32_t;
 static std::string ColorToString(const Color color)
 {
 	std::ostringstream oss;
-	oss << std::hex << std::setw(6) << std::setfill('0') << color;
+	oss << "#" << std::hex << std::setw(6) << std::setfill('0') << color;
 
 	return oss.str();
 }

@@ -24,7 +24,7 @@ public:
 
 	std::string GetDescription() const override
 	{
-		return "circle description";
+		return std::to_string(m_center.x) + " " + std::to_string(m_center.y) + " " + std::to_string(m_radius);
 	};
 
 	void Draw(gfx::ICanvas& canvas) const override
