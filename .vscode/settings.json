@@ -86,5 +86,6 @@
         "thread": "cpp",
         "unordered_set": "cpp"
     },
-    "cquery.cacheDirectory": "${workspaceFolder}/.vscode/cquery_cached_index/"
+    "cquery.cacheDirectory": "${workspaceFolder}/.vscode/cquery_cached_index/",
+    "C_Cpp.errorSquiggles": "disabled"
 }
