@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Point.h"
+#include "./Exception/InvalidCountParametersException.h"
 #include "./IShapeStrategy.h"
 
 class TextStrategy : public shapes::IShapeStrategy
@@ -8,7 +9,7 @@ class TextStrategy : public shapes::IShapeStrategy
 public:
 	TextStrategy(const std::vector<std::string>& parametrs)
 	{
-		ValidateParameters(parametrs);
+		ValidateCountParameters(parametrs);
 
 		m_topLeft = Point(std::stod(parametrs[0]), std::stod(parametrs[1]));
 		m_size = std::stod(parametrs[2]);
@@ -41,11 +42,11 @@ private:
 	std::string m_text;
 	u_int32_t m_size;
 
-	void static ValidateParameters(const std::vector<std::string>& parameters)
+	void static ValidateCountParameters(const std::vector<std::string>& parameters)
 	{
 		if (parameters.size() != 4)
 		{
-			throw std::invalid_argument("Invalid count arguments");
+			throw InvalidCountParametersException();
 		}
 	};
 };

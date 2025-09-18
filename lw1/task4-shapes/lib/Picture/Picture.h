@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Shape/Point.h"
 #include "../Shape/Shape.h"
 #include "../Shape/ShapeStrategy/IShapeStrategy.h"
 #include <map>

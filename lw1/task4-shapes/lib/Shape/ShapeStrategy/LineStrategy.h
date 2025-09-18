@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Point.h"
+#include "./Exception/InvalidCountParametersException.h"
 #include "./IShapeStrategy.h"
 
 class LineStrategy : public shapes::IShapeStrategy
@@ -8,7 +9,7 @@ class LineStrategy : public shapes::IShapeStrategy
 public:
 	LineStrategy(const std::vector<std::string>& parametrs)
 	{
-		ValidateParameters(parametrs);
+		ValidateCountParameters(parametrs);
 
 		m_start = Point(std::stod(parametrs[0]), std::stod(parametrs[1]));
 		m_end = Point(std::stod(parametrs[2]), std::stod(parametrs[3]));
@@ -42,11 +43,11 @@ private:
 	Point m_start;
 	Point m_end;
 
-	void static ValidateParameters(const std::vector<std::string>& parameters)
+	void static ValidateCountParameters(const std::vector<std::string>& parameters)
 	{
 		if (parameters.size() != 4)
 		{
-			throw std::invalid_argument("Invalid count arguments");
+			throw InvalidCountParametersException();
 		}
 	};
 };

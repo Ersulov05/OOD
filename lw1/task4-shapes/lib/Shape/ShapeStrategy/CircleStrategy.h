@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../Point.h"
+#include "./Exception/InvalidCountParametersException.h"
+#include "./Exception/UncorrectCircleRadiusException.h"
 #include "./IShapeStrategy.h"
 
 class CircleStrategy : public shapes::IShapeStrategy
@@ -8,9 +10,10 @@ class CircleStrategy : public shapes::IShapeStrategy
 public:
 	CircleStrategy(const std::vector<std::string>& parametrs)
 	{
-		ValidateParameters(parametrs);
+		ValidateCountParameters(parametrs);
 
 		m_radius = std::stod(parametrs[2]);
+		AssertCorrectRadius(m_radius);
 		m_center = Point(std::stod(parametrs[0]), std::stod(parametrs[1]));
 	};
 
@@ -39,11 +42,19 @@ private:
 	Point m_center;
 	double m_radius;
 
-	void static ValidateParameters(const std::vector<std::string>& parameters)
+	void static ValidateCountParameters(const std::vector<std::string>& parameters)
 	{
 		if (parameters.size() != 3)
 		{
-			throw std::invalid_argument("Invalid count arguments");
+			throw InvalidCountParametersException();
 		}
 	};
+
+	void static AssertCorrectRadius(double m_radius)
+	{
+		if (m_radius <= 0)
+		{
+			throw UncorrectCircleRadiusException();
+		}
+	}
 };
