@@ -16,6 +16,8 @@
 #include <stdexcept>
 #include <string>
 
+namespace app
+{
 class AppCommandFactory
 {
 public:
@@ -44,3 +46,4 @@ private:
 		{ "run", [this](const std::vector<std::string>& params) { return std::make_unique<RunWindowCommand>(params); } },
 	};
 };
+} // namespace app

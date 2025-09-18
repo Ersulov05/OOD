@@ -6,6 +6,8 @@
 #include "./ConsoleCommand/ConsoleCommand.h"
 #include <string>
 
+namespace app
+{
 class AppController
 {
 public:
@@ -30,10 +32,10 @@ public:
 
 private:
 	AppCommandFactory m_appCommandFactory;
-	Picture m_picture;
+	shapes::Picture m_picture;
 	static constexpr const u_int32_t CANVAS_WIDTH = 800;
 	static constexpr const u_int32_t CANVAS_HEIGHT = 600;
-	CCanvas m_canvas = CCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+	gfx::CCanvas m_canvas = gfx::CCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 	static constexpr const std::string EXIT_COMMAND_NAME = "exit";
 	static constexpr const std::string EMPTY_COMMAND_NAME = "";
 
@@ -50,3 +52,4 @@ private:
 		}
 	}
 };
+} // namespace app

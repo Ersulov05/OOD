@@ -3,7 +3,7 @@
 #include "../Point.h"
 #include "./IShapeStrategy.h"
 
-class TextStrategy : public IShapeStrategy
+class TextStrategy : public shapes::IShapeStrategy
 {
 public:
 	TextStrategy(const std::vector<std::string>& parametrs)
@@ -25,7 +25,7 @@ public:
 		return "text description";
 	};
 
-	void Draw(ICanvas& canvas) const override
+	void Draw(gfx::ICanvas& canvas) const override
 	{
 		canvas.DrawText(m_topLeft.x, m_topLeft.y, m_size, m_text);
 	};

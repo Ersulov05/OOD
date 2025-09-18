@@ -7,6 +7,8 @@
 #include <memory>
 #include <string>
 
+namespace shapes
+{
 class Shape
 {
 public:
@@ -37,7 +39,7 @@ public:
 			+ m_strategy->GetDescription();
 	}
 
-	void Draw(ICanvas& canvas) const
+	void Draw(gfx::ICanvas& canvas) const
 	{
 		canvas.SetColor(m_color);
 		m_strategy->Draw(canvas);
@@ -64,3 +66,4 @@ private:
 	Color m_color;
 	std::unique_ptr<IShapeStrategy> m_strategy;
 };
+} // namespace shapes

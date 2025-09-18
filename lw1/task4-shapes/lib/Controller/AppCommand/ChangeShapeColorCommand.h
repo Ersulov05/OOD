@@ -3,6 +3,8 @@
 #include "../../Color/Color.h"
 #include "./AppCommand.h"
 
+namespace app
+{
 class ChangeShapeColorCommand : public AppCommand
 {
 public:
@@ -11,7 +13,7 @@ public:
 	{
 	}
 
-	void Execute(std::ostream& output, Picture& picture, CCanvas& canvas) override
+	void Execute(std::ostream& output, shapes::Picture& picture, gfx::CCanvas& canvas) override
 	{
 		AssertCorrectCountArguments(m_parameters.size(), 1);
 		auto shapeId = m_parameters[0];
@@ -21,3 +23,4 @@ public:
 		output << "Change shape color" << std::endl;
 	}
 };
+} // namespace app

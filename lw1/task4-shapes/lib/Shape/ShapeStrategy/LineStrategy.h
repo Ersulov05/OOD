@@ -3,7 +3,7 @@
 #include "../Point.h"
 #include "./IShapeStrategy.h"
 
-class LineStrategy : public IShapeStrategy
+class LineStrategy : public shapes::IShapeStrategy
 {
 public:
 	LineStrategy(const std::vector<std::string>& parametrs)
@@ -24,7 +24,7 @@ public:
 		return "line description";
 	};
 
-	void Draw(ICanvas& canvas) const override
+	void Draw(gfx::ICanvas& canvas) const override
 	{
 		canvas.MoveTo(m_start.x, m_start.y);
 		canvas.LineTo(m_end.x, m_end.y);

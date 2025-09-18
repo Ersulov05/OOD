@@ -7,6 +7,8 @@
 #include <iostream>
 #include <memory>
 
+namespace gfx
+{
 class CCanvas : public gfx::ICanvas
 {
 public:
@@ -49,6 +51,7 @@ public:
 		sf::ConvexShape ellipse;
 		const int points = 100;
 
+		ellipse.setFillColor(sf::Color::Transparent);
 		ellipse.setOutlineColor(sf::Color(m_color));
 		ellipse.setOutlineThickness(2);
 		ellipse.setPointCount(points);
@@ -109,3 +112,4 @@ private:
 	Point m_cursor;
 	Color m_color;
 };
+} // namespace gfx

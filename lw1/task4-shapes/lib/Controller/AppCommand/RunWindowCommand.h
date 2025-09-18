@@ -2,6 +2,8 @@
 
 #include "./AppCommand.h"
 
+namespace app
+{
 class RunWindowCommand : public AppCommand
 {
 public:
@@ -10,8 +12,9 @@ public:
 	{
 	}
 
-	void Execute(std::ostream& output, Picture& picture, CCanvas& canvas) override
+	void Execute(std::ostream& output, shapes::Picture& picture, gfx::CCanvas& canvas) override
 	{
 		canvas.RunWindow();
 	}
 };
+} // namespace app

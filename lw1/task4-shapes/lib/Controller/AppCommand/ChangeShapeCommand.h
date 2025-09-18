@@ -3,6 +3,8 @@
 #include "../../Shape/ShapeStrategy/ShapeStrategyFactory.h"
 #include "./AppCommand.h"
 
+namespace app
+{
 class ChangeShapeCommand : public AppCommand
 {
 public:
@@ -11,7 +13,7 @@ public:
 	{
 	}
 
-	void Execute(std::ostream& output, Picture& picture, CCanvas& canvas) override
+	void Execute(std::ostream& output, shapes::Picture& picture, gfx::CCanvas& canvas) override
 	{
 		AssertCorrectCountArguments(m_parameters.size(), 2);
 		output << "Change shape" << std::endl;
@@ -28,3 +30,4 @@ public:
 private:
 	ShapeStrategyFactory m_shapeStrategyFactory;
 };
+} // namespace app

@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+namespace app
+{
 class AppCommand : public IAppCommand
 {
 public:
@@ -14,7 +16,7 @@ public:
 	{
 	}
 
-	virtual void Execute(std::ostream& output, Picture& picture, CCanvas& canvas) override
+	virtual void Execute(std::ostream& output, shapes::Picture& picture, gfx::CCanvas& canvas) override
 	{
 	}
 
@@ -29,3 +31,4 @@ protected:
 		}
 	}
 };
+} // namespace app

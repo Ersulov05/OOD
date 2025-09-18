@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 
+namespace shapes
+{
 class Picture
 {
 public:
@@ -74,7 +76,7 @@ public:
 		shape->Move(dx, dy);
 	}
 
-	void DrawShape(const std::string& shapeId, ICanvas& canvas) const
+	void DrawShape(const std::string& shapeId, gfx::ICanvas& canvas) const
 	{
 		auto shape = FindShapeById(shapeId);
 		AssertShapeExists(shape, shapeId);
@@ -82,7 +84,7 @@ public:
 		shape->Draw(canvas);
 	}
 
-	void DrawPicture(ICanvas& canvas) const
+	void DrawPicture(gfx::ICanvas& canvas) const
 	{
 		for (const auto& shape : m_shapes)
 		{
@@ -125,3 +127,4 @@ private:
 
 	std::vector<std::unique_ptr<Shape>> m_shapes;
 };
+} // namespace shapes

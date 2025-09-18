@@ -3,7 +3,7 @@
 #include "../Point.h"
 #include "./IShapeStrategy.h"
 
-class CircleStrategy : public IShapeStrategy
+class CircleStrategy : public shapes::IShapeStrategy
 {
 public:
 	CircleStrategy(const std::vector<std::string>& parametrs)
@@ -24,7 +24,7 @@ public:
 		return "circle description";
 	};
 
-	void Draw(ICanvas& canvas) const override
+	void Draw(gfx::ICanvas& canvas) const override
 	{
 		canvas.DrawEllipse(m_center.x, m_center.y, m_radius, m_radius);
 	};

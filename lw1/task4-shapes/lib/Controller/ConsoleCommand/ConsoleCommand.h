@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+namespace app
+{
 struct ConsoleCommand
 {
 	std::string name;
@@ -33,3 +35,4 @@ ConsoleCommand GetConsoleCommand(std::istream& input)
 
 	return command;
 }
+} // namespace app

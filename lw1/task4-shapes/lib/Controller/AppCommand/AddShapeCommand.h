@@ -5,6 +5,8 @@
 #include "../../Shape/ShapeStrategy/ShapeStrategyFactory.h"
 #include "./AppCommand.h"
 
+namespace app
+{
 class AddShapeCommand : public AppCommand
 {
 public:
@@ -13,7 +15,7 @@ public:
 	{
 	}
 
-	void Execute(std::ostream& output, Picture& picture, CCanvas& canvas) override
+	void Execute(std::ostream& output, shapes::Picture& picture, gfx::CCanvas& canvas) override
 	{
 		AssertCorrectCountArguments(m_parameters.size(), 3);
 		output << "Add shape" << std::endl;
@@ -23,7 +25,7 @@ public:
 		auto type = m_parameters[2];
 		auto params = std::vector<std::string>(m_parameters.begin() + 3, m_parameters.end());
 		auto shapeStrategy = m_shapeStrategyFactory.CreateStrategy(type, params);
-		auto shape = std::make_unique<Shape>(shapeId, color, std::move(shapeStrategy));
+		auto shape = std::make_unique<shapes::Shape>(shapeId, color, std::move(shapeStrategy));
 
 		picture.AddShape(std::move(shape));
 	}
@@ -31,3 +33,4 @@ public:
 private:
 	ShapeStrategyFactory m_shapeStrategyFactory;
 };
+} // namespace app

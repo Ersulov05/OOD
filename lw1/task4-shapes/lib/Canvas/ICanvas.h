@@ -3,6 +3,8 @@
 #include "../Color/Color.h"
 #include <iomanip>
 
+namespace gfx
+{
 class ICanvas
 {
 public:
@@ -13,3 +15,4 @@ public:
 	virtual void DrawText(double left, double top, double fontSize, const std::string& text) = 0;
 	virtual void SetColor(Color color) = 0;
 };
+} // namespace gfx

@@ -15,9 +15,9 @@
 class ShapeStrategyFactory
 {
 public:
-	using StrategyCreator = std::function<std::unique_ptr<IShapeStrategy>(const std::vector<std::string>&)>;
+	using StrategyCreator = std::function<std::unique_ptr<shapes::IShapeStrategy>(const std::vector<std::string>&)>;
 
-	std::unique_ptr<IShapeStrategy> CreateStrategy(const std::string& type, const std::vector<std::string>& params = {}) const
+	std::unique_ptr<shapes::IShapeStrategy> CreateStrategy(const std::string& type, const std::vector<std::string>& params = {}) const
 	{
 		auto it = m_strategyCreators.find(type);
 		if (it == m_strategyCreators.end())

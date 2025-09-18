@@ -2,6 +2,8 @@
 
 #include "./AppCommand.h"
 
+namespace app
+{
 class DeleteShapeCommand : public AppCommand
 {
 public:
@@ -10,7 +12,7 @@ public:
 	{
 	}
 
-	void Execute(std::ostream& output, Picture& picture, CCanvas& canvas) override
+	void Execute(std::ostream& output, shapes::Picture& picture, gfx::CCanvas& canvas) override
 	{
 		AssertCorrectCountArguments(m_parameters.size(), 1);
 
@@ -19,3 +21,4 @@ public:
 		picture.DeleteShape(shapeId);
 	}
 };
+} // namespace app

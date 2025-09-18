@@ -3,7 +3,7 @@
 
 int main()
 {
-	auto appController = AppController();
+	auto appController = app::AppController();
 	appController.Run();
 
 	return 0;

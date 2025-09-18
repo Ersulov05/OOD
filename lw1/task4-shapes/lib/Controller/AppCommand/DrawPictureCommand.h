@@ -2,6 +2,8 @@
 
 #include "./AppCommand.h"
 
+namespace app
+{
 class DrawPictureCommand : public AppCommand
 {
 public:
@@ -10,10 +12,11 @@ public:
 	{
 	}
 
-	void Execute(std::ostream& output, Picture& picture, CCanvas& canvas) override
+	void Execute(std::ostream& output, shapes::Picture& picture, gfx::CCanvas& canvas) override
 	{
 		picture.DrawPicture(canvas);
 		canvas.RunWindow();
 		// output << "Draw picture" << std::endl;
 	}
 };
+} // namespace app
