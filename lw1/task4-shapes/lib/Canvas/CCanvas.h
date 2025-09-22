@@ -69,7 +69,7 @@ public:
 	void DrawText(double left, double top, double fontSize, const std::string& text)
 	{
 		sf::Font font;
-		font.loadFromFile("Ubunt.ttf");
+		font.loadFromFile("/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf");
 		sf::Text txt(text, font, fontSize);
 		txt.setPosition(left, top);
 		txt.setFillColor(sf::Color(m_color));
