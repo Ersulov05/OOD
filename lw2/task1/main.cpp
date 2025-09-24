@@ -1,3 +1,4 @@
+#include "./lib/Display/Display.h"
 #include "./lib/WeatherData.h"
 
 int main()
