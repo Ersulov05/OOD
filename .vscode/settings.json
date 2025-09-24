@@ -87,5 +87,25 @@
         "unordered_set": "cpp"
     },
     "cquery.cacheDirectory": "${workspaceFolder}/.vscode/cquery_cached_index/",
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "coverage-gutters.showGutterCoverage": true,
+    "coverage-gutters.showLineCoverage": true,
+    "coverage-gutters.showRulerCoverage": true,
+    "coverage-gutters.lcovname": "./.vscode/coverage/coverage.lcov",
+    "coverage-gutters.coverageReportFileName": "coverage.lcov",
+    "coverage-gutters.highlightDark": "RGBA(64,128,64,0.5)",
+    "coverage-gutters.highlightLight": "RGBA(64,128,64,0.5)",
+    "coverage-gutters.noCoverageHighlightDark": "RGBA(128,64,64,0.5)",
+    "coverage-gutters.noCoverageHighlightLight": "RGBA(128,64,64,0.5)",
+    "coverage-gutters.lcovname": "./.vscode/coverage/coverage.lcov",
+    // Или если в корне:
+    "coverage-gutters.lcovname": "./coverage.lcov",
+    // Или если в папке coverage:
+    "coverage-gutters.lcovname": "./coverage/lcov.info",
+    // Можно указать маску для поиска
+    "coverage-gutters.coverageFileNames": [
+        "coverage.lcov",
+        "lcov.info",
+        "*.lcov"
+    ]
 }
