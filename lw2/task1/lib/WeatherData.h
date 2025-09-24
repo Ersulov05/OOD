@@ -25,34 +25,77 @@ private:
 	}
 };
 
+class CStatistic
+{
+public:
+	void Update(double value)
+	{
+		if (value < m_min)
+		{
+			m_min = value;
+		}
+		if (value > m_max)
+		{
+			m_max = value;
+		}
+
+		m_acc += value;
+		++m_countAcc;
+	}
+
+	double GetMin() const
+	{
+		return m_min;
+	}
+
+	double GetMax() const
+	{
+		return m_max;
+	}
+
+	double GetAverage() const
+	{
+		return m_countAcc > 0
+			? m_acc / m_countAcc
+			: 0;
+	}
+
+private:
+	double m_min = std::numeric_limits<double>::max();
+	double m_max = std::numeric_limits<double>::min();
+	double m_acc = 0.0;
+	size_t m_countAcc = 0;
+};
+
 class CStatDisplay : public IObserver<SWeatherInfo>
 {
 private:
 	void Update(SWeatherInfo const& data) override
 	{
-		if (m_minTemperature > data.temperature)
-		{
-			m_minTemperature = data.temperature;
-		}
+		m_temperatureStats.Update(data.temperature);
+		m_humidityStats.Update(data.humidity);
+		m_pressureStats.Update(data.pressure);
 
-		if (m_maxTemperature < data.temperature)
-		{
-			m_maxTemperature = data.temperature;
-		}
+		PrintStatistics();
+	}
 
-		m_accTemperature += data.temperature;
-		++m_countAcc;
-
-		std::cout << "Max Temp " << m_maxTemperature << std::endl;
-		std::cout << "Min Temp " << m_minTemperature << std::endl;
-		std::cout << "Average Temp " << (m_accTemperature / m_countAcc) << std::endl;
+	void PrintStatistics() const
+	{
+		std::cout << "Max Temp " << m_temperatureStats.GetMax() << std::endl;
+		std::cout << "Min Temp " << m_temperatureStats.GetMin() << std::endl;
+		std::cout << "Average Temp " << m_temperatureStats.GetAverage() << std::endl;
+		std::cout << "Max Hum " << m_humidityStats.GetMax() << std::endl;
+		std::cout << "Min Hum " << m_humidityStats.GetMin() << std::endl;
+		std::cout << "Average Hum " << m_humidityStats.GetAverage() << std::endl;
+		std::cout << "Max Pressure " << m_pressureStats.GetMax() << std::endl;
+		std::cout << "Min Pressure " << m_pressureStats.GetMin() << std::endl;
+		std::cout << "Average Pressure " << m_pressureStats.GetAverage() << std::endl;
 		std::cout << "----------------" << std::endl;
 	}
 
-	double m_minTemperature = std::numeric_limits<double>::infinity();
-	double m_maxTemperature = -std::numeric_limits<double>::infinity();
-	double m_accTemperature = 0;
-	unsigned m_countAcc = 0;
+	CStatistic m_temperatureStats;
+	CStatistic m_humidityStats;
+	CStatistic m_pressureStats;
 };
 
 class CWeatherData : public CObservable<SWeatherInfo>
