@@ -16,7 +16,7 @@ MAIN_SRCS := \
 
 # Тестовые файлы
 TEST_SRCS := \
-	$(TEST_DIR)/TestDuck.cpp
+	$(TEST_DIR)/NotifyObserversTest.cpp
 
 # Объектные файлы для основной программы
 MAIN_OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(MAIN_SRCS))
