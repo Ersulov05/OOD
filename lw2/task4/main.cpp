@@ -6,19 +6,14 @@ int main()
 	CWeatherData wd;
 	CWeatherData wd2;
 
-	CDisplay display(wd, wd2);
-	wd.RegisterObserver(display, 1);
-	wd2.RegisterObserver(display, 1);
+	CDisplay display(wd, 1, wd2, 1);
 
-	CStatDisplay statDisplay(wd, wd2);
-	wd.RegisterObserver(statDisplay, 2);
+	CStatDisplay statDisplay(wd, 2, wd2, 3);
 
 	wd.SetMeasurements(3, 0.7, 760);
 	wd.SetMeasurements(4, 0.8, 761);
 
 	wd2.SetMeasurements(3, 0.7, 760);
-
-	wd.RegisterObserver(statDisplay, 3);
 
 	wd.SetMeasurements(10, 0.8, 761);
 	wd.SetMeasurements(-10, 0.8, 761);

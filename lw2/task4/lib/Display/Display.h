@@ -4,13 +4,21 @@
 #include "Statistic.h"
 #include <iostream>
 
-class CDisplay : public IObserver<SWeatherInfo>
+class CDisplay : private IObserver<SWeatherInfo>
 {
 public:
-	CDisplay(IObservable<SWeatherInfo>& inObservable, IObservable<SWeatherInfo>& outObservable)
+	CDisplay(IObservable<SWeatherInfo>& inObservable, int inPriority, IObservable<SWeatherInfo>& outObservable, int outPriority)
 		: m_inObservable(inObservable)
 		, m_outObservable(outObservable)
 	{
+		inObservable.RegisterObserver(*this, inPriority);
+		outObservable.RegisterObserver(*this, outPriority);
+	}
+
+	~CDisplay()
+	{
+		m_inObservable.RemoveObserver(*this);
+		m_outObservable.RemoveObserver(*this);
 	}
 
 private:
@@ -26,7 +34,7 @@ private:
 		{
 			std::cout << "in sensor" << std::endl;
 		}
-		if (&observable == &m_outObservable)
+		else
 		{
 			std::cout << "out sensor" << std::endl;
 		}
@@ -44,13 +52,21 @@ private:
 	IObservable<SWeatherInfo>& m_outObservable;
 };
 
-class CStatDisplay : public IObserver<SWeatherInfo>
+class CStatDisplay : private IObserver<SWeatherInfo>
 {
 public:
-	CStatDisplay(IObservable<SWeatherInfo>& inObservable, IObservable<SWeatherInfo>& outObservable)
+	CStatDisplay(IObservable<SWeatherInfo>& inObservable, int inPriority, IObservable<SWeatherInfo>& outObservable, int outPriority)
 		: m_inObservable(inObservable)
 		, m_outObservable(outObservable)
 	{
+		inObservable.RegisterObserver(*this, inPriority);
+		outObservable.RegisterObserver(*this, outPriority);
+	}
+
+	~CStatDisplay()
+	{
+		m_inObservable.RemoveObserver(*this);
+		m_outObservable.RemoveObserver(*this);
 	}
 
 private:
@@ -70,7 +86,7 @@ private:
 		{
 			std::cout << "in sensor" << std::endl;
 		}
-		if (&observable == &m_outObservable)
+		else
 		{
 			std::cout << "out sensor" << std::endl;
 		}

@@ -5,19 +5,27 @@
 #include <iostream>
 #include <string>
 
-class CMockDisplay : public IObserver<SWeatherInfo>
+class CMockDisplay : private IObserver<SWeatherInfo>
 {
 public:
-	CMockDisplay(IObservable<SWeatherInfo>& inObservable, IObservable<SWeatherInfo>& outObservable, std::ostream& output)
+	CMockDisplay(IObservable<SWeatherInfo>& inObservable, int inPriority, IObservable<SWeatherInfo>& outObservable, int outPriority, std::ostream& output)
 		: m_inObservable(inObservable)
 		, m_outObservable(outObservable)
 		, m_output(output)
 	{
+		inObservable.RegisterObserver(*this, inPriority);
+		outObservable.RegisterObserver(*this, outPriority);
 	}
 
 	int GetUpdateCount() const
 	{
 		return m_updateCount;
+	}
+
+	~CMockDisplay()
+	{
+		m_inObservable.RemoveObserver(*this);
+		m_outObservable.RemoveObserver(*this);
 	}
 
 private:

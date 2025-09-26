@@ -21,10 +21,18 @@ public:
 		}
 
 		auto it = m_priorityObservers.emplace(-priority, &observer);
-		m_observersMap[&observer] = it;
+		try
+		{
+			m_observersMap[&observer] = it;
+		}
+		catch (...)
+		{
+			m_priorityObservers.erase(it);
+			throw;
+		}
 	}
 
-	void NotifyObservers() override
+	void NotifyObservers() const override
 	{
 		auto observers = GetObserversCopy();
 		T data = GetChangedData();
