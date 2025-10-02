@@ -13,28 +13,9 @@ template <class T1, class T2>
 class CPriorityObservable : public IObservable<T1, T2>
 {
 public:
-	static_assert(std::is_enum_v<T2>, "T2 must be an enum type!");
+	static_assert(std::is_enum_v<T2>, "T2 must be an enum type");
 
 	typedef IObserver<T1, T2> ObserverType;
-
-	struct ObserverInfo
-	{
-		ObserverType* observer;
-		T2 eventType;
-
-		bool operator==(const ObserverInfo& other) const
-		{
-			return observer == other.observer && eventType == other.eventType;
-		}
-	};
-
-	struct ObserverInfoHash
-	{
-		std::size_t operator()(const ObserverInfo& info) const
-		{
-			return std::hash<ObserverType*>()(info.observer) ^ std::hash<int>()(static_cast<int>(info.eventType));
-		}
-	};
 
 	void RegisterObserver(ObserverType& observer, int priority, T2 eventType) override
 	{
@@ -84,6 +65,25 @@ protected:
 	virtual T1 GetChangedData() const = 0;
 
 private:
+	struct ObserverInfo
+	{
+		ObserverType* observer;
+		T2 eventType;
+
+		bool operator==(const ObserverInfo& other) const
+		{
+			return observer == other.observer && eventType == other.eventType;
+		}
+	};
+
+	struct ObserverInfoHash
+	{
+		std::size_t operator()(const ObserverInfo& info) const
+		{
+			return std::hash<ObserverType*>()(info.observer) ^ std::hash<int>()(static_cast<int>(info.eventType));
+		}
+	};
+
 	std::multimap<int, ObserverInfo> m_priorityObservers;
 	std::unordered_map<ObserverInfo, typename std::multimap<int, ObserverInfo>::iterator, ObserverInfoHash> m_observersMap;
 
