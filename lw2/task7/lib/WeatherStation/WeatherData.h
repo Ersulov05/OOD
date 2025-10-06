@@ -22,6 +22,18 @@ enum class WeatherEventType
 	WindDirection
 };
 
+namespace std
+{
+template <>
+struct hash<WeatherEventType>
+{
+	size_t operator()(WeatherEventType et) const noexcept
+	{
+		return hash<underlying_type_t<WeatherEventType>>{}(static_cast<underlying_type_t<WeatherEventType>>(et));
+	}
+};
+} // namespace std
+
 class CWeatherData : public CPriorityObservable<SWeatherInfo, WeatherEventType>
 {
 public:

@@ -5,19 +5,17 @@
 #include <functional>
 #include <map>
 #include <set>
-#include <type_traits>
 #include <unordered_map>
 #include <vector>
 
-template <class T1, class T2>
-class CPriorityObservable : public IObservable<T1, T2>
+// TODO Давать понятные имена шаблонным типам
+template <class ObserverDataType, class EventType>
+class CPriorityObservable : public IObservable<ObserverDataType, EventType>
 {
 public:
-	static_assert(std::is_enum_v<T2>, "T2 must be an enum type");
+	typedef IObserver<ObserverDataType, EventType> ObserverType;
 
-	typedef IObserver<T1, T2> ObserverType;
-
-	void RegisterObserver(ObserverType& observer, int priority, T2 eventType) override
+	void RegisterObserver(ObserverType& observer, int priority, EventType eventType) override
 	{
 		ObserverInfo info{ &observer, eventType };
 
@@ -38,17 +36,17 @@ public:
 		}
 	}
 
-	void NotifyObservers(T2 eventType) override
+	void NotifyObservers(EventType eventType) override
 	{
 		auto observers = GetObserversForEvent(eventType);
-		T1 data = GetChangedData();
+		ObserverDataType data = GetChangedData();
 		for (auto& observer : observers)
 		{
 			observer->Update(data, eventType);
 		}
 	}
 
-	void RemoveObserver(ObserverType& observer, T2 eventType) override
+	void RemoveObserver(ObserverType& observer, EventType eventType) override
 	{
 		ObserverInfo info{ &observer, eventType };
 		auto it = m_observersMap.find(info);
@@ -62,13 +60,13 @@ public:
 	}
 
 protected:
-	virtual T1 GetChangedData() const = 0;
+	virtual ObserverDataType GetChangedData() const = 0;
 
 private:
 	struct ObserverInfo
 	{
 		ObserverType* observer;
-		T2 eventType;
+		EventType eventType;
 
 		bool operator==(const ObserverInfo& other) const
 		{
@@ -80,14 +78,15 @@ private:
 	{
 		std::size_t operator()(const ObserverInfo& info) const
 		{
-			return std::hash<ObserverType*>()(info.observer) ^ std::hash<int>()(static_cast<int>(info.eventType));
+			// не привязываться к инту
+			return std::hash<ObserverType*>()(info.observer) * 41 + std::hash<EventType>()(info.eventType);
 		}
 	};
 
 	std::multimap<int, ObserverInfo> m_priorityObservers;
 	std::unordered_map<ObserverInfo, typename std::multimap<int, ObserverInfo>::iterator, ObserverInfoHash> m_observersMap;
 
-	std::vector<ObserverType*> GetObserversForEvent(T2 eventType) const
+	std::vector<ObserverType*> GetObserversForEvent(EventType eventType) const
 	{
 		std::vector<ObserverType*> observers;
 

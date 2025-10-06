@@ -1,9 +1,9 @@
 #pragma once
 
-template <typename T1, typename T2>
+template <typename ObserverDataType, typename EventType>
 class IObserver
 {
 public:
-	virtual void Update(T1 const& data, T2 const& eventType) = 0;
+	virtual void Update(ObserverDataType const& data, EventType const& eventType) = 0;
 	virtual ~IObserver() = default;
 };

@@ -18,6 +18,18 @@ enum class AnimalEventType
 	ChangeEnergy
 };
 
+namespace std
+{
+template <>
+struct hash<AnimalEventType>
+{
+	size_t operator()(AnimalEventType et) const noexcept
+	{
+		return hash<underlying_type_t<AnimalEventType>>{}(static_cast<underlying_type_t<AnimalEventType>>(et));
+	}
+};
+} // namespace std
+
 class CAnimalData : public CPriorityObservable<SAnimalInfo, AnimalEventType>
 {
 public:
