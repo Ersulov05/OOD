@@ -12,6 +12,8 @@
 #include <string>
 #include <vector>
 
+#include "./lib/Stream/Output/CMemoryOutputStream.h"
+
 using InputStreamDecoratorFactoriesType = std::vector<std::function<IInputStreamPtr(IInputStreamPtr&&)>>;
 using OutputStreamDecoratorFactoriesType = std::vector<std::function<IOutputStreamPtr(IOutputStreamPtr&&)>>;
 

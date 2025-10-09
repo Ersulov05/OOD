@@ -6,7 +6,7 @@
 class CFileOutputStream final : public IOutputStream
 {
 public:
-	explicit CFileOutputStream(const std::string& fileName)
+	CFileOutputStream(const std::string& fileName)
 		: m_file(fileName, std::ios::binary)
 	{
 		if (!m_file.is_open() || m_file.bad())

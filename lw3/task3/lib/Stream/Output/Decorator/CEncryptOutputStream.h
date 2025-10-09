@@ -21,14 +21,12 @@ public:
 	void WriteBlock(const void* srcData, const std::streamsize size) override
 	{
 		const auto* data = static_cast<const uint8_t*>(srcData);
-		std::vector<uint8_t> encryptedData(size);
 		for (std::streamsize i = 0; i < size; ++i)
 		{
-			encryptedData[i] = CryptByte(data[i], m_key);
+			WriteByte(data[i]);
 		}
-		m_outputStream->WriteBlock(encryptedData.data(), size);
 	}
 
 private:
-	uint32_t m_key;
+	uint8_t m_key;
 };

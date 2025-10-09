@@ -31,5 +31,5 @@ public:
 	}
 
 private:
-	uint32_t m_key;
+	uint8_t m_key;
 };
