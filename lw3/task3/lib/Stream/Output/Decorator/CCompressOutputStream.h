@@ -44,6 +44,11 @@ public:
 		m_outputStream->Close();
 	}
 
+	~CCompressOutputStream() override
+	{
+		Close();
+	}
+
 private:
 	uint8_t m_currentCount = 0;
 	uint8_t m_currentByte = 0;
