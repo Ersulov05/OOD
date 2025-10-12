@@ -35,42 +35,99 @@ public:
 	}
 };
 
-// Капуччино
-class CCappuccino : public CCoffee
+enum class CoffeeSize
+{
+	STANDART,
+	DOUBLE,
+}
+
+class CCoffeeWithSize : public CCoffee
 {
 public:
-	CCappuccino(bool isDouble = false)
-		: CCoffee(isDouble ? "Double Cappuccino" : "Cappuccino")
-		, m_isDouble(isDouble)
+	CCoffeeWithSize(
+		const std::string& description = "Coffee",
+		CoffeeSize size = CoffeeSize::STANDART)
+		: CCoffee(GetDescription(size, description))
+	{
+	}
+
+private:
+	static std::string GetDescription(CoffeeSize size, std::string description)
+	{
+		switch (size)
+		{
+		case CoffeeSize::STANDART:
+			return description;
+		case CoffeeSize::DOUBLE:
+			return "Double " + description;
+		default:
+			throw std::runtime_error("Unknown Size");
+		}
+	}
+}
+
+// Капуччино
+class CCappuccino : public CCoffeeWithSize
+{
+public:
+	CCappuccino(CoffeeSize size = CoffeeSize::STANDART)
+		: CCoffeeWithSize("Cappuccino", size) // Избавиться от дублирования
+		, m_size(size)
 	{
 	}
 
 	double GetCost() const override
 	{
-		return m_isDouble ? 120 : 80;
+		return GetSizeCost(m_size);
 	}
 
 private:
-	bool m_isDouble;
+	CoffeeSize m_size;
+
+	static double GetSizeCost(CoffeeSize size)
+	{
+		switch (size)
+		{
+		case CoffeeSize::STANDART:
+			return 80;
+		case CoffeeSize::DOUBLE:
+			return 120;
+		default:
+			throw std::runtime_error("Unknown size");
+		}
+	}
 };
 
 // Латте
-class CLatte : public CCoffee
+class CLatte : public CCoffeeWithSize
 {
 public:
-	CLatte(bool isDouble = false)
-		: CCoffee(isDouble ? "Double Latte" : "Latte")
-		, m_isDouble(isDouble)
+	CLatte(CoffeeSize size = CoffeeSize::STANDART)
+		: CCoffeeWithSize("Latte", size)
+		, m_size(size)
 	{
 	}
 
 	double GetCost() const override
 	{
-		return m_isDouble ? 130 : 90;
+		return GetSizeCost(m_size);
 	}
 
 private:
-	bool m_isDouble;
+	CoffeeSize m_size;
+
+	static double GetSizeCost(CoffeeSize size)
+	{
+		switch (size)
+		{
+		case CoffeeSize::STANDART:
+			return 90;
+		case CoffeeSize::DOUBLE:
+			return 130;
+		default:
+			throw std::runtime_error("Unknown size");
+		}
+	}
 };
 
 enum class TeaType

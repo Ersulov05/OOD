@@ -12,8 +12,6 @@
 #include <string>
 #include <vector>
 
-#include "./lib/Stream/Output/CMemoryOutputStream.h"
-
 using InputStreamDecoratorFactoriesType = std::vector<std::function<IInputStreamPtr(IInputStreamPtr&&)>>;
 using OutputStreamDecoratorFactoriesType = std::vector<std::function<IOutputStreamPtr(IOutputStreamPtr&&)>>;
 
@@ -93,27 +91,27 @@ int main(const int argc, char* argv[])
 	try
 	{
 		InitDecoratorFactories(inputDecoratorFactories, outputDecoratorFactories, argc - 2, argv);
+
+		IInputStreamPtr inputFile = std::make_unique<CFileInputStream>(inputFileName);
+		IOutputStreamPtr outputFile = std::make_unique<CFileOutputStream>(outputFileName);
+		for (auto& factory : inputDecoratorFactories)
+		{
+			inputFile = factory(std::move(inputFile));
+		}
+		for (auto& factory : outputDecoratorFactories)
+		{
+			outputFile = factory(std::move(outputFile));
+		}
+
+		while (!inputFile->IsEOF())
+		{
+			outputFile->WriteByte(inputFile->ReadByte());
+		}
 	}
 	catch (const std::exception& e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 		return 1;
-	}
-
-	IInputStreamPtr inputFile = std::make_unique<CFileInputStream>(inputFileName);
-	IOutputStreamPtr outputFile = std::make_unique<CFileOutputStream>(outputFileName);
-	for (auto& factory : inputDecoratorFactories)
-	{
-		inputFile = factory(std::move(inputFile));
-	}
-	for (auto& factory : outputDecoratorFactories)
-	{
-		outputFile = factory(std::move(outputFile));
-	}
-
-	while (!inputFile->IsEOF())
-	{
-		outputFile->WriteByte(inputFile->ReadByte());
 	}
 
 	return 0;

@@ -19,14 +19,15 @@ public:
 	}
 
 	// Стоимость и описание добавки вычисляется в классах конкретных декораторов
-	virtual std::string GetCondimentDescription() const = 0;
-	virtual double GetCondimentCost() const = 0;
 
 protected:
 	CCondimentDecorator(IBeveragePtr&& beverage)
 		: m_beverage(move(beverage))
 	{
 	}
+
+	virtual std::string GetCondimentDescription() const = 0; // TODO Вынести в протектед
+	virtual double GetCondimentCost() const = 0;
 
 private:
 	IBeveragePtr m_beverage;

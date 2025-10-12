@@ -21,7 +21,6 @@ public:
 	bool IsEOF() const override
 	{
 		AssertFileOpened();
-		// return m_file.rdstate() & std::ios_base::eofbit;
 
 		return m_file.peek() == std::char_traits<char>::eof();
 	}
@@ -29,7 +28,7 @@ public:
 	uint8_t ReadByte() override
 	{
 		AssertFileOpened();
-		char byte;
+		char byte; // проверить всё ли хорошо
 		m_file.read(&byte, sizeof(byte));
 
 		if (m_file.bad())
