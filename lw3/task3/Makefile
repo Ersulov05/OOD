@@ -16,7 +16,12 @@ MAIN_SRCS := \
 
 # Тестовые файлы
 TEST_SRCS := \
-	$(TEST_DIR)/TestCMemoryInputStream.cpp
+	$(TEST_DIR)/TestCMemoryInputStream.cpp \
+	$(TEST_DIR)/TestCMemoryOutputStream.cpp \
+	$(TEST_DIR)/TestCEncryptOutputStream.cpp \
+	$(TEST_DIR)/TestCDecryptInputStream.cpp \
+	$(TEST_DIR)/TestCDecompresstInputStream.cpp \
+	$(TEST_DIR)/TestCCompressOutputStream.cpp
 
 # Объектные файлы для основной программы
 MAIN_OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(MAIN_SRCS))

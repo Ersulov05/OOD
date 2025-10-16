@@ -23,6 +23,11 @@ public:
 		m_data.insert(m_data.end(), bytes, bytes + size);
 	}
 
+	const std::vector<uint8_t> GetBytes() const
+	{
+		return m_data;
+	}
+
 	void Close() override
 	{
 		m_isOpen = false;
