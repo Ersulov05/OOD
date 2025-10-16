@@ -44,16 +44,15 @@ public:
 
 	void DrawLine(float x1, float y1, float x2, float y2)
 	{
-		sf::Vertex line[] = {
-			sf::Vertex(
-				sf::Vector2f(x1, y1),
-				m_color),
-			sf::Vertex(
-				sf::Vector2f(x2, y2),
-				m_color)
-		};
-
-		m_renderTexture->draw(line, 2, sf::Lines);
+		float thickness = 1.0;
+		for (float i = -thickness / 2; i <= thickness / 2; i += 0.5f)
+		{
+			sf::Vertex line[] = {
+				sf::Vertex(sf::Vector2f(x1 + i, y1 + i), m_color),
+				sf::Vertex(sf::Vector2f(x2 + i, y2 + i), m_color)
+			};
+			m_renderTexture->draw(line, 2, sf::Lines);
+		}
 	}
 
 	void SetColor(Color color)
@@ -92,6 +91,10 @@ private:
 			return sf::Color(0x0000ffff);
 		case Color::Black:
 			return sf::Color(0x000000ff);
+		case Color::Yellow:
+			return sf::Color(0xffff00ff);
+		case Color::Pink:
+			return sf::Color(0xff00ffff);
 		default:
 			throw UnknownColorException();
 		}
