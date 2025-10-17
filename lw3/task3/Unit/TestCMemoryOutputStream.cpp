@@ -29,6 +29,24 @@ TEST_CASE("Test WriteBlock")
 	REQUIRE(memoryOutputStream.GetBytes() == std::vector<uint8_t>{ 'x', 'x', 'x' });
 }
 
+TEST_CASE("Test WriteBlock Zero")
+{
+	CMemoryOutputStream memoryOutputStream;
+
+	memoryOutputStream.WriteBlock("xxx", 0);
+
+	REQUIRE(memoryOutputStream.GetBytes() == std::vector<uint8_t>{});
+}
+
+TEST_CASE("Test WriteBlock Grete")
+{
+	CMemoryOutputStream memoryOutputStream;
+
+	memoryOutputStream.WriteBlock("xxx", 5);
+
+	REQUIRE(memoryOutputStream.GetBytes() == std::vector<uint8_t>{ 'x', 'x', 'x' });
+}
+
 TEST_CASE("Test Close WriteBlock")
 {
 	CMemoryOutputStream memoryOutputStream;

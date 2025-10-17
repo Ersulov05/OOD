@@ -43,3 +43,34 @@ TEST_CASE("Test ReadByte")
 	auto byte = memoryInputStream.ReadByte();
 	REQUIRE(byte == 1);
 }
+
+TEST_CASE("Test ReadBlock")
+{
+	CMemoryInputStream memoryInputStream(std::vector<uint8_t>{ 'x', 'y', 'z', 'a', 'b' });
+
+	char bytes[6] = {};
+
+	memoryInputStream.ReadBlock(bytes, 5);
+
+	REQUIRE(std::string(bytes) == "xyzab");
+}
+
+TEST_CASE("Test ReadBlock Zero")
+{
+	CMemoryInputStream memoryInputStream(std::vector<uint8_t>{ 'x', 'y', 'z', 'a', 'b' });
+
+	char bytes[6] = {};
+
+	memoryInputStream.ReadBlock(bytes, 0);
+
+	REQUIRE(std::string(bytes) == "");
+}
+
+TEST_CASE("Test ReadBlock Close")
+{
+	CMemoryInputStream memoryInputStream(std::vector<uint8_t>{ 'x', 'y', 'z', 'a', 'b' });
+	memoryInputStream.Close();
+	char bytes[6] = {};
+
+	REQUIRE_THROWS(memoryInputStream.ReadBlock(bytes, 5));
+}

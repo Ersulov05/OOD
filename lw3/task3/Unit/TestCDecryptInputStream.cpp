@@ -62,3 +62,31 @@ TEST_CASE("Test Empty ReadByte with decryption")
 
 	REQUIRE_THROWS(decryptInputStream.ReadByte());
 }
+
+TEST_CASE("Test IsEOF")
+{
+	int8_t key = 42;
+	auto memoryInputStream = std::make_unique<CMemoryInputStream>(std::vector<uint8_t>{ 'x', 'x' });
+	CDecryptInputStream decryptInputStream(std::move(memoryInputStream), key);
+
+	REQUIRE(decryptInputStream.IsEOF() == false);
+}
+
+TEST_CASE("Test IsEOF Empty")
+{
+	int8_t key = 42;
+	auto memoryInputStream = std::make_unique<CMemoryInputStream>(std::vector<uint8_t>{});
+	CDecryptInputStream decryptInputStream(std::move(memoryInputStream), key);
+
+	REQUIRE(decryptInputStream.IsEOF() == true);
+}
+
+TEST_CASE("Test IsEOF Close")
+{
+	int8_t key = 42;
+	auto memoryInputStream = std::make_unique<CMemoryInputStream>(std::vector<uint8_t>{ 'x', 'x' });
+	CDecryptInputStream decryptInputStream(std::move(memoryInputStream), key);
+
+	decryptInputStream.Close();
+	REQUIRE_THROWS(decryptInputStream.IsEOF());
+}

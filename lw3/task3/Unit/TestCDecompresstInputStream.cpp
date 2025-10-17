@@ -57,3 +57,45 @@ TEST_CASE("Test ReadBlock with decryption")
 
 	REQUIRE(std::string(bytes) == "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxyy");
 }
+
+TEST_CASE("Test IsEOF")
+{
+	auto memoryInputStream = std::make_unique<CMemoryInputStream>(std::vector<uint8_t>{ 'x', 30, 'y', 3 });
+	CDecompressInputStream decompressInputStream(std::move(memoryInputStream));
+
+	REQUIRE(decompressInputStream.IsEOF() == false);
+}
+
+TEST_CASE("Test IsEOF Read")
+{
+	auto memoryInputStream = std::make_unique<CMemoryInputStream>(std::vector<uint8_t>{ 'x', 2 });
+	auto* originalMemoryPtr = memoryInputStream.get();
+	CDecompressInputStream decompressInputStream(std::move(memoryInputStream));
+
+	auto byte = decompressInputStream.ReadByte();
+
+	REQUIRE(decompressInputStream.IsEOF() == false);
+	REQUIRE(originalMemoryPtr->IsEOF() == true);
+
+	byte = decompressInputStream.ReadByte();
+
+	REQUIRE(decompressInputStream.IsEOF() == true);
+	REQUIRE(originalMemoryPtr->IsEOF() == true);
+}
+
+TEST_CASE("Test IsEOF Empty")
+{
+	auto memoryInputStream = std::make_unique<CMemoryInputStream>(std::vector<uint8_t>{});
+	CDecompressInputStream decompressInputStream(std::move(memoryInputStream));
+
+	REQUIRE(decompressInputStream.IsEOF() == true);
+}
+
+TEST_CASE("Test IsEOF Close")
+{
+	auto memoryInputStream = std::make_unique<CMemoryInputStream>(std::vector<uint8_t>{ 'x', 30, 'y', 3 });
+	CDecompressInputStream decompressInputStream(std::move(memoryInputStream));
+
+	decompressInputStream.Close();
+	REQUIRE_THROWS(decompressInputStream.IsEOF());
+}
