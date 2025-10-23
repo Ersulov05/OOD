@@ -1,0 +1,4 @@
+Green rectangle 250 300 300 300
+Red triangle 250 300 550 300 400 500
+Blue circle 400 150 70
+Yellow circle 100 500 70
