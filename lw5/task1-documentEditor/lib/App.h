@@ -32,11 +32,16 @@ public:
 		m_menu.Run();
 	}
 
+	~App()
+	{
+		m_imageService.DeleteDirImages();
+	}
+
 private:
 	Menu m_menu = Menu(std::cin, std::cout);
 	DocumentEditor m_documentEditor;
 	Document m_document;
-	ImageService m_imageService;
+	ImageService m_imageService = ImageService("temp_images");
 
 	void SetupMenu()
 	{

@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -11,6 +12,12 @@
 class ImageService
 {
 public:
+	ImageService(const std::string& dir)
+		: m_imageDir(dir)
+	{
+		DeleteDirImages();
+	}
+
 	std::string SaveImage(std::string path)
 	{
 		size_t dotPos = path.find_last_of('.');
@@ -18,8 +25,8 @@ public:
 			? path.substr(dotPos)
 			: "";
 		std::string newFilename = GenerateName() + extension;
-		std::string savePath = IMAGE_DIR + "/" + newFilename;
-		std::filesystem::create_directories(IMAGE_DIR);
+		std::string savePath = m_imageDir + "/" + newFilename;
+		std::filesystem::create_directories(m_imageDir);
 
 		try
 		{
@@ -48,8 +55,16 @@ public:
 		}
 	}
 
+	void DeleteDirImages()
+	{
+		if (std::filesystem::exists(m_imageDir))
+		{
+			std::filesystem::remove_all(m_imageDir);
+		}
+	}
+
 private:
-	static inline const std::string IMAGE_DIR = "images";
+	std::string m_imageDir;
 
 	std::string GenerateName()
 	{

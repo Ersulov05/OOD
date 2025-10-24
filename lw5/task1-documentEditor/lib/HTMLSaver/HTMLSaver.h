@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Document/IDocument.h"
+#include "../ImageService/ImageService.h"
 #include <fstream>
 #include <iomanip>
 #include <sstream>
@@ -8,18 +9,34 @@
 class HTMLSaver
 {
 public:
-	static void Save(const IDocument& document, const std::string& filePath)
+	static void Save(const IDocument& document, const std::string& fileName)
 	{
-		std::ofstream file(filePath);
+		std::string imageDir = GetFileNameWithoutExtension(fileName) + "dir";
+		auto imageService = ImageService(imageDir);
+
+		std::ofstream file(fileName);
 		if (!file.is_open())
 		{
-			throw std::runtime_error("Cannot open file for writing: " + filePath);
+			throw std::runtime_error("Cannot open file for writing: " + fileName);
 		}
 
-		file << GenerateHTML(document);
+		file << GenerateHTML(document, imageService);
 	}
 
-	static std::string GenerateHTML(const IDocument& document)
+private:
+	static std::string GetFileNameWithoutExtension(const std::string& fileName)
+	{
+		size_t pos = fileName.find_last_of('.');
+
+		if (pos == std::string::npos || pos == 0)
+		{
+			return fileName;
+		}
+
+		return fileName.substr(0, pos);
+	}
+
+	static std::string GenerateHTML(const IDocument& document, ImageService& imageService)
 	{
 		std::ostringstream html;
 
@@ -27,15 +44,15 @@ public:
 		html << "<html>\n";
 		html << "<head>\n";
 		html << "    <meta charset=\"utf-8\">\n";
-		html << "    <title>" << EscapeHTML(document.GetTitle()) << "</title>\n";
+		html << "    <title>" << document.GetTitle() << "</title>\n";
 		html << "</head>\n";
 		html << "<body>\n";
-		html << "    <h1>" << EscapeHTML(document.GetTitle()) << "</h1>\n";
+		html << "    <h1>" << document.GetTitle() << "</h1>\n";
 
 		auto items = document.ListItems();
 		for (const auto& item : items)
 		{
-			html << "    " << GenerateItemHTML(item);
+			html << "    " << GenerateItemHTML(item, imageService);
 		}
 
 		html << "</body>\n";
@@ -44,9 +61,9 @@ public:
 		return html.str();
 	}
 
-private:
-	static std::string GenerateItemHTML(const DocumentItem& item)
+	static std::string GenerateItemHTML(const DocumentItem& item, ImageService& imageService)
 	{
+
 		std::ostringstream html;
 
 		if (auto paragraph = item.GetParagraph())
@@ -55,7 +72,8 @@ private:
 		}
 		else if (auto image = item.GetImage())
 		{
-			html << "<img src=\"" << image->GetPath() << "\" "
+			auto imagePath = imageService.SaveImage(image->GetPath());
+			html << "<img src=\"" << imagePath << "\" "
 				 << "width=\"" << image->GetWidth() << "\" "
 				 << "height=\"" << image->GetHeight() << "\">\n";
 		}
