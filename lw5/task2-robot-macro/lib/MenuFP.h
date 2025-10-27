@@ -77,7 +77,7 @@ public:
 		m_items.emplace_back(shortcut, description, CreateMacroCommand(commands));
 	}
 
-	bool IsCommandExists(const std::string& shortcut)
+	bool AreCommandExists(const std::string& shortcut)
 	{
 		const auto it = std::ranges::find_if(m_items, [&](const Item& item) {
 			return item.shortcut == shortcut;

@@ -1,8 +1,6 @@
 #include "./lib/Commands.h"
 #include "./lib/MenuFP.h"
 
-using namespace std;
-
 void AddMacroCommand(CMenuFP& menu)
 {
 	std::string shortcut, description;
@@ -13,18 +11,20 @@ void AddMacroCommand(CMenuFP& menu)
 
 	std::cout << "Введите описание команды: " << std::endl;
 	std::getline(std::cin, description);
+	std::cout << "Запись макрокоманды началась" << std::endl;
+	std::cout << "Для завершения введите end_macro" << std::endl;
 
 	std::string command;
 	while (true)
 	{
-		std::cout << "> ";
+		std::cout << "+> ";
 		std::getline(std::cin, command);
 		if (command == "end_macro")
 		{
 			break;
 		}
 
-		if (menu.IsCommandExists(command))
+		if (menu.AreCommandExists(command))
 		{
 			commandNames.push_back(command);
 		}
@@ -44,30 +44,24 @@ void SetupMenu(CMenuFP& menu, Robot& robot)
 		robot.TurnOn();
 	});
 	menu.AddItem("off", "Turns the Robot off",
-		bind(&Robot::TurnOff, &robot));
-
+		std::bind(&Robot::TurnOff, &robot));
 	menu.AddItem("north", "Makes the Robot walk north",
-		bind(&Robot::Walk, &robot, WalkDirection::North));
+		std::bind(&Robot::Walk, &robot, WalkDirection::North));
 	menu.AddItem("south", "Makes the Robot walk south",
-		bind(&Robot::Walk, &robot, WalkDirection::South));
+		std::bind(&Robot::Walk, &robot, WalkDirection::South));
 	menu.AddItem("west", "Makes the Robot walk west",
-		bind(&Robot::Walk, &robot, WalkDirection::West));
+		std::bind(&Robot::Walk, &robot, WalkDirection::West));
 	menu.AddItem("east", "Makes the Robot walk east",
-		bind(&Robot::Walk, &robot, WalkDirection::East));
-
+		std::bind(&Robot::Walk, &robot, WalkDirection::East));
 	menu.AddItem("stop", "Stops the Robot",
-		bind(&Robot::Stop, &robot));
-
-	// menu.AddItem("patrol", "Patrol the territory", CreateMacroCommand<vector<CMenuFP::Command>>({ bind(&Robot::TurnOn, &robot), bind(&Robot::Walk, &robot, WalkDirection::North), bind(&Robot::Walk, &robot, WalkDirection::South), bind(&Robot::Walk, &robot, WalkDirection::West), bind(&Robot::Walk, &robot, WalkDirection::East), bind(&Robot::TurnOff, &robot) }));
-
-	menu.AddItem("begin_macro", "Start recording a new macro", [&] {
+		std::bind(&Robot::Stop, &robot));
+	menu.AddItem("begin_macro", "Begin recording macro command", [&] {
 		AddMacroCommand(menu);
 	});
-
 	menu.AddItem("help", "Show instructions",
-		bind(&CMenuFP::ShowInstructions, &menu));
+		std::bind(&CMenuFP::ShowInstructions, &menu));
 	menu.AddItem("exit", "Exit from this menu",
-		bind(&CMenuFP::Exit, &menu));
+		std::bind(&CMenuFP::Exit, &menu));
 }
 
 int main()
