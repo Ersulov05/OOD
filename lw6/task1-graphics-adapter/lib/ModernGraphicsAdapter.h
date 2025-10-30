@@ -18,9 +18,9 @@ public:
 		m_start.y = y;
 	}
 
-	void LineTo(const int x, const int y) override
+	void LineTo(int x, int y) override
 	{
-		const modern_graphics_lib::CPoint end(x, y);
+		modern_graphics_lib::CPoint end(x, y);
 
 		m_renderer.DrawLine(m_start, end);
 
