@@ -27,6 +27,16 @@ public:
 		MoveTo(x, y);
 	}
 
+	void BeginDraw()
+	{
+		m_renderer.BeginDraw();
+	}
+
+	void EndDraw()
+	{
+		m_renderer.EndDraw();
+	}
+
 private:
 	modern_graphics_lib::CPoint m_start;
 	modern_graphics_lib::CModernGraphicsRenderer& m_renderer;

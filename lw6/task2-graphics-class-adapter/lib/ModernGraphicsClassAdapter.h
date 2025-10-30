@@ -4,7 +4,7 @@
 
 class ModernGraphicsClassAdapter
 	: public graphics_lib::ICanvas
-	, public modern_graphics_lib::CModernGraphicsRenderer
+	, private modern_graphics_lib::CModernGraphicsRenderer
 {
 public:
 	ModernGraphicsClassAdapter(std::ostream& out)
@@ -25,6 +25,16 @@ public:
 
 		DrawLine(m_start, end);
 		MoveTo(x, y);
+	}
+
+	void BeginDraw()
+	{
+		CModernGraphicsRenderer::BeginDraw();
+	}
+
+	void EndDraw()
+	{
+		CModernGraphicsRenderer::EndDraw();
 	}
 
 private:

@@ -32,9 +32,9 @@ void PaintPictureOnModernGraphicsRenderer()
 	ModernGraphicsAdapter modernCanvas(renderer);
 	shape_drawing_lib::CCanvasPainter painter(modernCanvas);
 
-	renderer.BeginDraw();
+	modernCanvas.BeginDraw();
 	PaintPicture(painter);
-	renderer.EndDraw();
+	modernCanvas.EndDraw();
 }
 
 void PaintPictureOnModernGraphics()
