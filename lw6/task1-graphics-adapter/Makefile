@@ -23,13 +23,7 @@ SRCS += $(MAIN_SRCS)
 
 # Тестовые файлы
 TEST_SRCS := \
-	$(TEST_DIR)/Item/ImageTest.cpp \
-	$(TEST_DIR)/Item/ParagraphTest.cpp \
-	$(TEST_DIR)/DocumentItemTest.cpp \
-	$(TEST_DIR)/DocumentTest.cpp \
-	$(TEST_DIR)/HistoryTest.cpp \
-	$(TEST_DIR)/DocumentEditorTest.cpp \
-	$(TEST_DIR)/MenuTest.cpp
+	$(TEST_DIR)/ModernGraphicsAdapterTest.cpp
 
 # Объектные файлы для основной программы
 MAIN_OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(MAIN_SRCS))
