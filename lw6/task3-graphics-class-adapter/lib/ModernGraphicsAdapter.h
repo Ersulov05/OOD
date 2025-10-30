@@ -15,7 +15,7 @@ public:
 
 	void SetColor(uint32_t color) override
 	{
-		m_color = color;
+		m_color = convertColorToRGBAColor(color);
 	}
 
 	void MoveTo(int x, int y) override
@@ -28,7 +28,7 @@ public:
 	{
 		const modern_graphics_lib::CPoint end(x, y);
 
-		m_renderer.DrawLine(m_start, end, convertColorToRGBAColor(m_color));
+		m_renderer.DrawLine(m_start, end, m_color);
 		MoveTo(x, y);
 	}
 
@@ -43,9 +43,9 @@ public:
 	}
 
 private:
-	uint32_t m_color = 0;
-	modern_graphics_lib::CPoint m_start;
 	modern_graphics_lib::CModernGraphicsRenderer& m_renderer;
+	modern_graphics_lib::CRGBAColor m_color{ 0, 0, 0, 0 };
+	modern_graphics_lib::CPoint m_start;
 
 	modern_graphics_lib::CRGBAColor convertColorToRGBAColor(uint32_t color)
 	{
