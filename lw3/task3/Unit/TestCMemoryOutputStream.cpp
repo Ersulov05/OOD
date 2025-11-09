@@ -38,7 +38,7 @@ TEST_CASE("Test WriteBlock Zero")
 	REQUIRE(memoryOutputStream.GetBytes() == std::vector<uint8_t>{});
 }
 
-TEST_CASE("Test WriteBlock Grete")
+TEST_CASE("Test WriteBlock Greater")
 {
 	CMemoryOutputStream memoryOutputStream;
 

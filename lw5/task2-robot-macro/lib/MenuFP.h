@@ -12,22 +12,16 @@ class CMenuFP
 public:
 	typedef std::function<void()> Command;
 
-	template <typename Commands>
-	static Command CreateMacroCommand(Commands&& commands)
-	{
-		return [=] {
-			for (auto& command : commands)
-			{
-				command();
-			}
-		};
-	}
-
 	void AddItem(
 		const std::string& shortcut,
 		const std::string& description,
 		const Command& command)
 	{
+		if (AreCommandExists(shortcut))
+		{
+			std::cout << "Command already exists" << std::endl;
+			return;
+		}
 		m_items.emplace_back(shortcut, description, command);
 	}
 
@@ -86,6 +80,17 @@ public:
 	}
 
 private:
+	template <typename Commands>
+	static Command CreateMacroCommand(Commands&& commands)
+	{
+		return [=] {
+			for (auto& command : commands)
+			{
+				command();
+			}
+		};
+	}
+
 	bool ExecuteCommand(const std::string& command)
 	{
 		m_exit = false;

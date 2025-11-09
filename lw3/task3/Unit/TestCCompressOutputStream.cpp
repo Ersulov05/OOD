@@ -48,7 +48,7 @@ TEST_CASE("Test WriteBlock with compressed")
 	REQUIRE(originalMemoryPtr->GetBytes() == std::vector<uint8_t>{ 'x', 3, 'y', 4, 'z', 2 });
 }
 
-TEST_CASE("Test WriteBlock with compressed 255 bytes")
+TEST_CASE("Test WriteBlock with compressed max one byte value")
 {
 	auto memoryOutputStream = std::make_unique<CMemoryOutputStream>();
 	auto* originalMemoryPtr = memoryOutputStream.get();
@@ -61,7 +61,7 @@ TEST_CASE("Test WriteBlock with compressed 255 bytes")
 	REQUIRE(originalMemoryPtr->GetBytes() == std::vector<uint8_t>{ 'x', 255 });
 }
 
-TEST_CASE("Test WriteBlock with compressed 256 bytes")
+TEST_CASE("Test WriteBlock with compressed max one byte + 1 value")
 {
 	auto memoryOutputStream = std::make_unique<CMemoryOutputStream>();
 	auto* originalMemoryPtr = memoryOutputStream.get();

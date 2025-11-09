@@ -1,19 +1,9 @@
-#include "./lib/Commands.h"
 #include "./lib/MenuFP.h"
+#include "./lib/Robot.h"
 
-void AddMacroCommand(CMenuFP& menu)
+std::vector<std::string> GetCommandNames(CMenuFP& menu)
 {
-	std::string shortcut, description;
 	std::vector<std::string> commandNames;
-
-	std::cout << "Введите название команды: " << std::endl;
-	std::getline(std::cin, shortcut);
-
-	std::cout << "Введите описание команды: " << std::endl;
-	std::getline(std::cin, description);
-	std::cout << "Запись макрокоманды началась" << std::endl;
-	std::cout << "Для завершения введите end_macro" << std::endl;
-
 	std::string command;
 	while (true)
 	{
@@ -34,6 +24,27 @@ void AddMacroCommand(CMenuFP& menu)
 		}
 	}
 
+	return commandNames;
+}
+
+void AddMacroCommand(CMenuFP& menu)
+{
+	std::string shortcut, description;
+	std::cout << "Введите название команды: " << std::endl;
+	std::getline(std::cin, shortcut);
+	if (menu.AreCommandExists(shortcut))
+	{
+		std::cout << "Command already exists" << std::endl;
+		std::cout << "Запись макрокоманды отменена" << std::endl;
+		return;
+	}
+
+	std::cout << "Введите описание команды: " << std::endl;
+	std::getline(std::cin, description);
+	std::cout << "Запись макрокоманды началась" << std::endl;
+	std::cout << "Для завершения введите end_macro" << std::endl;
+
+	auto commandNames = GetCommandNames(menu);
 	menu.AddMacroCommand(shortcut, description, commandNames);
 	std::cout << "Макрокоманда записана" << std::endl;
 }
