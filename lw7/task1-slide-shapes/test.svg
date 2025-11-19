@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600">
+  <polygon points="0,0 800,0 800,600 0,600" fill="#00000000" stroke="#000000ff" stroke-width="1"/>
+  <polygon points="300,400 500,400 500,600 300,600" fill="#00ff00ff" stroke="#00000000" stroke-width="1"/>
+  <polygon points="400,300 500,400 300,400" fill="#ff0000ff" stroke="#00000000" stroke-width="1"/>
+  <polygon points="350,450 450,450 450,550 350,550" fill="#00ffffff" stroke="#e05200ff" stroke-width="7"/>
+  <polygon points="395,450 405,450 405,550 395,550" fill="#e05200ff" stroke="#00000000" stroke-width="1"/>
+  <polygon points="350,495 450,495 450,505 350,505" fill="#e05200ff" stroke="#00000000" stroke-width="1"/>
+  <ellipse cx="100" cy="100" rx="50" ry="50" fill="#ffff00ff" stroke="#00000000" stroke-width="1"/>
+</svg>
