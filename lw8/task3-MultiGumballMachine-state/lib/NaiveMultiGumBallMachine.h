@@ -103,8 +103,8 @@ public:
 		m_count = numBalls;
 		m_state = numBalls > 0
 			? m_quarterCount > 0
-				? State::NoQuarter
-				: State::HasQuarter
+				? State::HasQuarter
+				: State::NoQuarter
 			: State::SoldOut;
 	}
 

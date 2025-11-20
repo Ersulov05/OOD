@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_FAST_COMPILE
 #define CATCH_CONFIG_MAIN
 #include "../../../catch/catch.hpp"
-#include "../lib/GumBallMachineWithDynamicallyCreatedState.h"
+#include "../lib/GamballMachineDinamical/MultiGumBallMachine.h"
 #include <sstream>
 
 TEST_CASE("HasQuarterState Dispense")
@@ -43,4 +43,28 @@ TEST_CASE("HasQuarterState TurnCrank")
 
 	state.TurnCrank(out);
 	REQUIRE(out.str() == "You turned but there's no quarter\n");
+}
+
+TEST_CASE("NoQuarterState Refill")
+{
+	with_dynamic_state::GumballMachine machine(5);
+	with_dynamic_state::NoQuarterState state(machine);
+	std::stringstream out;
+
+	REQUIRE(machine.ToString().find("waiting for quarter") != std::string::npos);
+	state.Refill(5, out);
+	REQUIRE(out.str() == "Refill\n");
+	REQUIRE(machine.ToString().find("waiting for quarter") != std::string::npos);
+}
+
+TEST_CASE("NoQuarterState Refill zero")
+{
+	with_dynamic_state::GumballMachine machine(5);
+	with_dynamic_state::NoQuarterState state(machine);
+	std::stringstream out;
+
+	REQUIRE(machine.ToString().find("waiting for quarter") != std::string::npos);
+	state.Refill(0, out);
+	REQUIRE(out.str() == "Refill\n");
+	REQUIRE(machine.ToString().find("sold out") != std::string::npos);
 }
