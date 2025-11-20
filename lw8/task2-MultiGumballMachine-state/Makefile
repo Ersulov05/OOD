@@ -27,7 +27,8 @@ TEST_SRCS := \
 	$(TEST_DIR)/GumballMachineSoldOutStateTest.cpp \
 	$(TEST_DIR)/GumballMachineSoldStateTest.cpp \
 	$(TEST_DIR)/GumballMachineHasQuarterStateTest.cpp \
-	$(TEST_DIR)/GumballMachineNoQuarterStateTest.cpp
+	$(TEST_DIR)/GumballMachineNoQuarterStateTest.cpp \
+	$(TEST_DIR)/DinamicalGumballMachineTest.cpp
 
 # Объектные файлы для основной программы
 MAIN_OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(MAIN_SRCS))

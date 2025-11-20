@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_FAST_COMPILE
 #define CATCH_CONFIG_MAIN
 #include "../../../catch/catch.hpp"
-#include "../lib/GumBallMachineWithDynamicallyCreatedState.h"
+#include "../lib/GamballMachineDinamical/MultiGumBallMachine.h"
 #include <sstream>
 
 TEST_CASE("HasQuarterState Dispense")
