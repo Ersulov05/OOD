@@ -4,7 +4,7 @@
 #include "../lib/GamballMachineDinamical/MultiGumBallMachine.h"
 #include <sstream>
 
-TEST_CASE("HasQuarterState Dispense")
+TEST_CASE("NoQuarterState Dispense")
 {
 	with_dynamic_state::GumballMachine machine(5);
 	with_dynamic_state::NoQuarterState state(machine);
@@ -14,7 +14,7 @@ TEST_CASE("HasQuarterState Dispense")
 	REQUIRE(out.str() == "You need to pay first\n");
 }
 
-TEST_CASE("HasQuarterState InsertQuarter")
+TEST_CASE("NoQuarterState InsertQuarter")
 {
 	with_dynamic_state::GumballMachine machine(5);
 	with_dynamic_state::NoQuarterState state(machine);
@@ -25,7 +25,7 @@ TEST_CASE("HasQuarterState InsertQuarter")
 	REQUIRE(machine.ToString().find("waiting for turn of crank") != std::string::npos);
 }
 
-TEST_CASE("HasQuarterState EjectQuarter")
+TEST_CASE("NoQuarterState EjectQuarter")
 {
 	with_dynamic_state::GumballMachine machine(5);
 	with_dynamic_state::NoQuarterState state(machine);
@@ -35,7 +35,7 @@ TEST_CASE("HasQuarterState EjectQuarter")
 	REQUIRE(out.str() == "You haven't inserted a quarter\n");
 }
 
-TEST_CASE("HasQuarterState TurnCrank")
+TEST_CASE("NoQuarterState TurnCrank")
 {
 	with_dynamic_state::GumballMachine machine(5);
 	with_dynamic_state::NoQuarterState state(machine);

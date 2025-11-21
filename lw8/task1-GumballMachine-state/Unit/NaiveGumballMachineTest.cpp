@@ -38,7 +38,7 @@ TEST_CASE("Insert quarter in HasQuarter state")
 	naive::GumballMachine machine(5);
 	machine.InsertQuarter();
 	REQUIRE(machine.GetState() == "waiting for turn of crank");
-	machine.InsertQuarter(); // Second insert
+	machine.InsertQuarter();
 	REQUIRE(machine.GetState() == "waiting for turn of crank");
 }
 
