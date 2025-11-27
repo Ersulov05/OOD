@@ -67,7 +67,11 @@ public:
 		m_fillStyle.SetColor(color);
 	}
 
-private:
+	virtual std::string GetType() const override = 0;
+
+	std::unique_ptr<IShape> Clone() const override = 0;
+
+protected:
 	Frame m_frame;
 	OutlineStyle m_lineStyle;
 	FillStyle m_fillStyle;

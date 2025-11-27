@@ -376,3 +376,35 @@ TEST_CASE("Test GroupShapesByIndexes index out of range")
 	REQUIRE(group.GetShapesCount() == 2);
 	REQUIRE_THROWS(group.GroupShapesByIndexes({ 3, 4 }));
 }
+
+TEST_CASE("Test GroupShapes Clone")
+{
+	GroupShapesList shapeList;
+	shapeList.push_back(std::make_unique<Rectangle>(Frame(10, 20, 30, 40), OutlineStyle(0xff, 2), FillStyle(0xaa)));
+	shapeList.push_back(std::make_unique<Triangle>(Frame(50, 60, 70, 80), OutlineStyle(0xff, 2), FillStyle(0xaa)));
+
+	auto originalGroup = std::make_unique<GroupShapes>(std::move(shapeList));
+
+	auto clonedGroup = originalGroup->Clone();
+
+	REQUIRE(originalGroup.get() != clonedGroup.get());
+
+	REQUIRE(clonedGroup->GetType() == "group");
+
+	auto originalFrame = originalGroup->GetFrame();
+	auto clonedFrame = clonedGroup->GetFrame();
+	REQUIRE(originalFrame.left == clonedFrame.left);
+	REQUIRE(originalFrame.top == clonedFrame.top);
+	REQUIRE(originalFrame.width == clonedFrame.width);
+	REQUIRE(originalFrame.height == clonedFrame.height);
+
+	REQUIRE(originalGroup->GetOutlineColor() == clonedGroup->GetOutlineColor());
+	REQUIRE(originalGroup->GetOutlineThickness() == clonedGroup->GetOutlineThickness());
+	REQUIRE(originalGroup->GetFillColor() == clonedGroup->GetFillColor());
+	originalGroup->SetFillColor(0xbb);
+	clonedGroup->SetOutlineColor(0xcc);
+	REQUIRE(originalGroup->GetOutlineColor() != clonedGroup->GetOutlineColor());
+	REQUIRE(originalGroup->GetFillColor() != clonedGroup->GetFillColor());
+	REQUIRE(clonedGroup->GetOutlineColor() == 0xcc);
+	REQUIRE(originalGroup->GetFillColor() == 0xbb);
+}

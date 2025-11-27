@@ -26,5 +26,7 @@ public:
 
 	virtual void SetFillColor(std::optional<Color> color) = 0;
 
+	virtual std::unique_ptr<IShape> Clone() const = 0;
+
 	~IShape() override = default;
 };

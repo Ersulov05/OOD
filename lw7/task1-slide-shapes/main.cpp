@@ -32,15 +32,15 @@ std::unique_ptr<IShape> GetHome()
 	homeGroup.push_back(std::move(roof));
 	homeGroup.push_back(std::move(window));
 
-	auto wall1 = std::make_unique<Rectangle>(Frame(0, 0, 0, 0), OutlineStyle(), FillStyle(green));
-	auto wall2 = std::make_unique<Rectangle>(Frame(0, 0, 0, 0), OutlineStyle(), FillStyle(green));
-	GroupShapesList homeGroup1;
-	homeGroup1.push_back(std::move(wall1));
-	homeGroup1.push_back(std::move(wall2));
-	auto g1 = std::make_unique<GroupShapes>(std::move(homeGroup1));
-	g1->SetFrame(Frame(1, 1, 1, 1));
-	auto frame = g1->GetFrame();
-	std::cout << frame.width << " " << frame.height << std::endl;
+	// auto wall1 = std::make_unique<Rectangle>(Frame(0, 0, 0, 0), OutlineStyle(), FillStyle(green));
+	// auto wall2 = std::make_unique<Rectangle>(Frame(0, 0, 0, 0), OutlineStyle(), FillStyle(green));
+	// GroupShapesList homeGroup1;
+	// homeGroup1.push_back(std::move(wall1));
+	// homeGroup1.push_back(std::move(wall2));
+	// auto g1 = std::make_unique<GroupShapes>(std::move(homeGroup1));
+	// g1->SetFrame(Frame(1, 1, 1, 1));
+	// auto frame = g1->GetFrame();
+	// std::cout << frame.width << " " << frame.height << std::endl;
 	return std::make_unique<GroupShapes>(std::move(homeGroup));
 }
 
@@ -54,8 +54,9 @@ int main()
 	CCanvas canvas;
 	Slide slide(800, 600);
 
+	auto home = GetHome();
 	slide.AddShape(std::make_unique<Rectangle>(Frame(0, 0, 800, 600), OutlineStyle(black), FillStyle()));
-	slide.AddShape(GetHome());
+	slide.AddShape(home->Clone());
 	slide.AddShape(GetSun());
 
 	slide.Draw(canvas);

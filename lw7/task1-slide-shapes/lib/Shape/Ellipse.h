@@ -30,4 +30,9 @@ public:
 		auto ry = frame.height / 2;
 		canvas.DrawEllipse(frame.left + rx, frame.top + ry, rx, ry);
 	}
+
+	std::unique_ptr<IShape> Clone() const override
+	{
+		return std::make_unique<Ellipse>(m_frame, m_lineStyle, m_fillStyle);
+	}
 };

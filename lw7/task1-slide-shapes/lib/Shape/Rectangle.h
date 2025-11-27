@@ -35,4 +35,9 @@ public:
 			{ frame.left, frame.top + frame.height },
 		});
 	}
+
+	std::unique_ptr<IShape> Clone() const override
+	{
+		return std::make_unique<Rectangle>(m_frame, m_lineStyle, m_fillStyle);
+	}
 };

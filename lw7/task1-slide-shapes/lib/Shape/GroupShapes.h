@@ -21,6 +21,16 @@ public:
 		}
 	}
 
+	std::unique_ptr<IShape> Clone() const override
+	{
+		GroupShapesList clonedShapes;
+		for (const auto& shape : m_shapes)
+		{
+			clonedShapes.push_back(shape->Clone());
+		}
+		return std::make_unique<GroupShapes>(std::move(clonedShapes));
+	}
+
 	Frame GetFrame() const override
 	{
 		if (m_shapes.empty())
