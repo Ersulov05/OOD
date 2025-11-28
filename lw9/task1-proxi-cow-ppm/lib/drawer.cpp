@@ -138,7 +138,6 @@ void FillCircle(Image& image, Point center, int radius, uint32_t color)
 
 	while (x <= y)
 	{
-		// Заливаем горизонтальные линии между симметричными точками
 		for (int dx = -x; dx <= x; dx++)
 		{
 			image.SetPixel({ center.x + dx, center.y + y }, color);
