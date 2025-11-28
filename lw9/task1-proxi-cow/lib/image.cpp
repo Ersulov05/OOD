@@ -97,8 +97,6 @@ Image LoadImage(const std::string& pixels)
 
 	Image img(size);
 
-	auto x = WriteProxy<Tile>();
-
 	s = std::istringstream(pixels);
 	for (int y = 0; y < size.height; ++y)
 	{

@@ -9,7 +9,7 @@ int main()
 {
 	{
 		Image img{ { 30, 30 }, '.' };
-		FillCircle(img, { 15, 15 }, 4, '#');
+		DrawCircle(img, { 15, 15 }, 4, '#');
 
 		Print(img, std::cout);
 	}

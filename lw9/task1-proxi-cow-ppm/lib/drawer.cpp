@@ -125,7 +125,7 @@ void DrawCircle(Image& image, Point center, int radius, uint32_t color)
 		image.SetPixel({ center.x - y, center.y - x }, color);
 		delta += delta < 0
 			? 4 * x + 6
-			: 4 * (x - y--) + 10;
+			: 4 * (x - --y) + 10;
 		++x;
 	}
 }
@@ -152,7 +152,7 @@ void FillCircle(Image& image, Point center, int radius, uint32_t color)
 
 		delta += delta < 0
 			? 4 * x + 6
-			: 4 * (x - y--) + 10;
+			: 4 * (x - --y) + 10;
 		++x;
 	}
 }
