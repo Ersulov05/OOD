@@ -60,9 +60,7 @@ void Image::SetPixel(Point p, uint32_t color)
 		const int tileY = p.y / Tile::SIZE;
 		const int pixelX = p.x % Tile::SIZE;
 		const int pixelY = p.y % Tile::SIZE;
-		m_tiles[tileY][tileX].Write([&](Tile& tile) {
-			tile.SetPixel({ pixelX, pixelY }, color);
-		});
+		m_tiles[tileY][tileX].Write()->SetPixel({ pixelX, pixelY }, color);
 	}
 }
 

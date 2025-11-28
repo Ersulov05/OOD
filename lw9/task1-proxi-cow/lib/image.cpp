@@ -60,9 +60,7 @@ void Image::SetPixel(Point p, char color)
 		const int tileY = p.y / Tile::SIZE;
 		const int pixelX = p.x % Tile::SIZE;
 		const int pixelY = p.y % Tile::SIZE;
-		m_tiles[tileY][tileX].Write([&](Tile& tile) {
-			tile.SetPixel({ pixelX, pixelY }, color);
-		});
+		m_tiles[tileY][tileX].Write()->SetPixel({ pixelX, pixelY }, color);
 	}
 }
 
@@ -98,6 +96,8 @@ Image LoadImage(const std::string& pixels)
 	}
 
 	Image img(size);
+
+	auto x = WriteProxy<Tile>();
 
 	s = std::istringstream(pixels);
 	for (int y = 0; y < size.height; ++y)
