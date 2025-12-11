@@ -1,0 +1,30 @@
+.selection {
+    position: absolute
+}
+
+.point {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    width: 15px;
+    transform: translate(-50%, -50%);
+    background: blue;
+    border: 1px solid white;
+    position: absolute;
+    cursor: pointer;
+}
+
+.vLine {
+    position: absolute;
+    background: orange;
+    transform: translateX(-50%);
+    width: 5px;
+    cursor: pointer;
+}
+
+.hLine {
+    position: absolute;
+    background: orange;
+    transform: translateY(-50%);
+    height: 5px;
+    cursor: pointer;
+}

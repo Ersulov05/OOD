@@ -1,0 +1,15 @@
+{
+    "files": [],
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.node.json"
+        }
+    ],
+    "formatCodeOptions": {
+        "indentSize": 4,
+        "tabSize": 4
+    }
+}
