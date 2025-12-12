@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import type { DocumentController } from "../controller/DocumentController"
 import styles from './DocumentView.module.css'
-import { Selection } from "./Selection"
+import { Selection } from "./Selection/Selection"
 import { defaulTransformData, type TransformData } from "./types"
 import { ShapeView } from "./ShapeView"
+import { Menu } from "./Menu/Menu"
 
 type DocumentViewProps = {
     controller: DocumentController
@@ -42,35 +43,11 @@ function DocumentView({
 
     return (
         <div className={styles.documentContainer}>
-            <div className={styles.documentMenu}>
-                <button onClick={() => controller.addShape('rectangle')}>
-                    Rectangle
-                </button>
-                <button onClick={() => controller.addShape('ellipse')}>
-                    Ellipse
-                </button>
-                <button onClick={() => controller.addShape('triangle')}>
-                    Triangle
-                </button>
-
-                <button onClick={() => controller.setShapesFillColor(selectedShapeIds, 'red')}>
-                    Red
-                </button>
-                <button onClick={() => {
-                    controller.deleteShapes(selectedShapeIds)
-                    setSelectedShapeIds([])
-                }}>
-                    delete
-                </button>
-
-                <button onClick={() => controller.undo()}>
-                    undo
-                </button>
-                <button onClick={() => controller.redo()}>
-                    redo
-                </button>
-
-            </div>
+            <Menu
+                controller={controller}
+                resetSelection={() => setSelectedShapeIds([])}
+                selectedShapeIds={selectedShapeIds}
+            />
             <div
                 className={styles.canvas}
                 onClick={(e) => {

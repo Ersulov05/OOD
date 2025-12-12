@@ -5,7 +5,7 @@ import { SetShapesFillColorCommand } from "./commands/SetShapesFillColorCommand"
 import { TransformShapesCommand } from "./commands/TransformShapesCommand"
 import { DocumentModel } from "./Document"
 import { History } from "./History"
-import type { ShapeType } from "./Shape/Shape"
+import type { IShape, ShapeType } from "./Shape/Shape"
 import type { Position, Size } from "./types"
 
 class DocumentEditor {
@@ -52,6 +52,13 @@ class DocumentEditor {
 
     public redo(): void {
         this.history.redo()
+        this.notifyObservers()
+    }
+
+    public loadShapes(shapes: IShape[]): void {
+        this.documentModel = new DocumentModel()
+        shapes.forEach(shape => this.documentModel.addShape(shape))
+        this.history.clear()
         this.notifyObservers()
     }
 

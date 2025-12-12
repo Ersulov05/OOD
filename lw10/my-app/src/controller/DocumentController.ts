@@ -1,6 +1,7 @@
 import type { DocumentEditor } from "../models/DocumentEditor"
 import type { IReadShape, ShapeType } from "../models/Shape/Shape"
 import type { Position, Size } from "../models/types"
+import { SaveLoader } from "./SaveLoader"
 
 class DocumentController {
     constructor(documentEditor: DocumentEditor) {
@@ -23,6 +24,14 @@ class DocumentController {
         if (shapeIds.length > 0) {
             this.documentEditor.deleteShapes(shapeIds)
         }
+    }
+
+    public saveDocument(): string {
+        return SaveLoader.saveDocument(this.documentEditor.getDocument())
+    }
+
+    public loadDocument(json: string): void {
+        SaveLoader.loadDocument(this.documentEditor, json)
     }
 
     public transformShapes(shapeIds: string[], deltaPosition: Position, sizeScale: Size) {

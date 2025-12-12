@@ -15,10 +15,8 @@ function ShapeView({
     selectShape,
     addToSelection,
 }: ShapeViewProps) {
-    // const type = shape.type
-
     const handleShapeClick = (e: React.MouseEvent) => {
-        if (e.ctrlKey || e.metaKey) { // metaKey для Mac (Cmd)
+        if (e.ctrlKey || e.metaKey) {
             e.stopPropagation()
             addToSelection()
         } else {
@@ -110,7 +108,6 @@ function TriangleView({
         />
     )
 }
-
 
 function EllipseView({
     shape,

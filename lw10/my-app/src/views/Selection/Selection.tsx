@@ -1,8 +1,8 @@
-import { useDragAndDrop } from "./hooks/useDragAndDrop"
+import { useDragAndDrop } from "../hooks/useDragAndDrop"
 import styles from './Selection.module.css'
-import type { Position, Size } from "../models/types"
-import { type SelectionData, type TransformData } from "./types"
-import type { IReadShape } from "../models/Shape/Shape"
+import type { Position, Size } from "../../models/types"
+import { type SelectionData, type TransformData } from "../types"
+import type { IReadShape } from "../../models/Shape/Shape"
 
 type SelectionProps = {
     selectedShapes: IReadShape[]
